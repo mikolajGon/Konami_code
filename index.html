@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Key Detection</title>
+    <script type="text/javascript" src="http://www.cornify.com/js/cornify.js"></script>
+</head>
+
+<body>
+    <script>
+
+        let keyVariation = [0, 0, 0, 0, 0, 0];
+        const password = [74, 74, 74, 74, 74, 74]
+        let timeout = true;
+
+        function delay() {
+            timeout = false;
+            setTimeout(() => {
+                timeout = true;
+                keyVariation = [0, 0, 0, 0, 0, 0];
+            }, 3000);
+        }
+
+        window.addEventListener('keyup', (e) => {
+            if (timeout) delay();
+            keyVariation.shift();
+            keyVariation.push(e.keyCode);
+            if (password.length === keyVariation.length && password.every((value, index) => value === keyVariation[index])) {
+                alert(`It's alive !`);
+                cornify_add();
+                keyVariation = [0, 0, 0, 0, 0, 0];
+            };
+        });
+    </script>
+</body>
+
+</html>
